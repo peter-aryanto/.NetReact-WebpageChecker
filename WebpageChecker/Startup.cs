@@ -26,7 +26,7 @@ namespace WebpageChecker
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "webpage-checker/build";
+                configuration.RootPath = "ClientApp/build";
             });
         }
 
@@ -59,7 +59,7 @@ namespace WebpageChecker
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "webpage-checker";
+                spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {

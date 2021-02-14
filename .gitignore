@@ -1,8 +1,5 @@
 .DS_Store
 
-# backup
-*.OLD
-
 # dotnet core
 bin/
 obj/
