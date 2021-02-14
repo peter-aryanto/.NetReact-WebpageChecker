@@ -9,16 +9,16 @@ namespace WebpageChecker.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WebpageCheckerController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<WebpageCheckerController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WebpageCheckerController(ILogger<WebpageCheckerController> logger)
         {
             _logger = logger;
         }

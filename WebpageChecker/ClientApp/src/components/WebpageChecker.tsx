@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { ApplicationState } from '../store';
-import * as WeatherForecastsStore from '../store/WeatherForecasts';
+import * as WebpageCheckerStore from '../store/WebpageChecker';
 
 // At runtime, Redux will merge together...
-type WeatherForecastProps =
-  WeatherForecastsStore.WeatherForecastsState // ... state we've requested from the Redux store
-  & typeof WeatherForecastsStore.actionCreators // ... plus action creators we've requested
+type WebpageCheckerProps =
+  WebpageCheckerStore.WebpageCheckerState // ... state we've requested from the Redux store
+  & typeof WebpageCheckerStore.actionCreators // ... plus action creators we've requested
   & RouteComponentProps<{ startDateIndex: string }>; // ... plus incoming routing parameters
 
 
-class FetchData extends React.PureComponent<WeatherForecastProps> {
+class WebpageData extends React.PureComponent<WebpageCheckerProps> {
   // This method is called when the component is first added to the document
   public componentDidMount() {
     this.ensureDataFetched();
@@ -26,7 +26,7 @@ class FetchData extends React.PureComponent<WeatherForecastProps> {
   public render() {
     return (
       <React.Fragment>
-        <h1 id="tabelLabel">Weather forecast</h1>
+        <h1 id="tabelLabel">Webpage Checker</h1>
         <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
         {this.renderForecastsTable()}
         {this.renderPagination()}
@@ -36,7 +36,7 @@ class FetchData extends React.PureComponent<WeatherForecastProps> {
 
   private ensureDataFetched() {
     const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 0;
-    this.props.requestWeatherForecasts(startDateIndex);
+    this.props.requestWebpageChecker(startDateIndex);
   }
 
   private renderForecastsTable() {
@@ -51,7 +51,7 @@ class FetchData extends React.PureComponent<WeatherForecastProps> {
           </tr>
         </thead>
         <tbody>
-          {this.props.forecasts.map((forecast: WeatherForecastsStore.WeatherForecast) =>
+          {this.props.forecasts.map((forecast: WebpageCheckerStore.WebpageChecker) =>
             <tr key={forecast.date}>
               <td>{forecast.date}</td>
               <td>{forecast.temperatureC}</td>
@@ -70,15 +70,15 @@ class FetchData extends React.PureComponent<WeatherForecastProps> {
 
     return (
       <div className="d-flex justify-content-between">
-        <Link className='btn btn-outline-secondary btn-sm' to={`/fetch-data/${prevStartDateIndex}`}>Previous</Link>
+        <Link className='btn btn-outline-secondary btn-sm' to={`/WebpageChecker/${prevStartDateIndex}`}>Previous</Link>
         {this.props.isLoading && <span>Loading...</span>}
-        <Link className='btn btn-outline-secondary btn-sm' to={`/fetch-data/${nextStartDateIndex}`}>Next</Link>
+        <Link className='btn btn-outline-secondary btn-sm' to={`/WebpageChecker/${nextStartDateIndex}`}>Next</Link>
       </div>
     );
   }
 }
 
 export default connect(
-  (state: ApplicationState) => state.weatherForecasts, // Selects which state properties are merged into the component's props
-  WeatherForecastsStore.actionCreators // Selects which action creators are merged into the component's props
-)(FetchData as any);
+  (state: ApplicationState) => state.webpageChecker, // Selects which state properties are merged into the component's props
+  WebpageCheckerStore.actionCreators // Selects which action creators are merged into the component's props
+)(WebpageData as any);
